@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>bfcache test — page 1</title>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    <p><a href="page.html">Link</a>.</p>
+    Init time: <output id="out1">—</output><br>
+    After load: <output id="out2">0</output> s
+    <script>
+
+    	var initTime = new Date();
+
+    	var out1 = document.getElementById('out1');
+    	out1.innerHTML = initTime;
+
+    	var out2 = document.getElementById('out2');
+    	window.setInterval(function() {
+    		out2.innerHTML = Math.floor((+(new Date()) - initTime) / 1000);
+    	}, 1000);
+
+        console.log('Complete! ' + initTime);
+
+        require(['script'], function() {
+            console.log('Script loaded: ' + initTime);
+        });
+
+    </script>
+</body>
+</html>
